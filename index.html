@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Два пончика и чашка кофе — Уютная кофейня</title>
+    <title>Два пончика и чашка кофе</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <style>
-        /* ===== RESET & BASE ===== */
-        *, *::before, *::after {
+        :root {
+            --color-cream: #FAF3E0;
+            --color-light-brown: #C4A484;
+            --color-medium-brown: #8B5A2B;
+            --color-dark-brown: #4A3018;
+            --color-text: #2C1E16;
+            --color-white: #FFFFFF;
+            --transition-speed: 0.3s;
+        }
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -17,216 +27,149 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #3a2218;
-            background: #fff8f0;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-cream);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-dark-brown);
         }
 
-        ul { list-style: none; }
-
-        /* ===== VARIABLES (via raw colors) ===== */
-        /* Primary:   #4a2c2a  Dark brown */
-        /* Secondary: #6b3a2a  Medium brown */
-        /* Accent:    #d4a574  Warm caramel */
-        /* Light:     #f5e6d3  Cream */
-        /* BG:        #fff8f0  Off-white */
-        /* Text:      #3a2218  Dark */
-
-        /* ===== NAVBAR ===== */
-        .navbar {
-            position: fixed;
+        /* Навигация */
+        header {
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
+            background-color: var(--color-white);
+            box-shadow: 0 2px 10px rgba(74, 48, 24, 0.1);
             z-index: 1000;
-            background: rgba(74, 44, 42, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 0 2rem;
-            transition: box-shadow 0.3s;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+            padding: 1rem 0;
+            transition: all var(--transition-speed);
         }
 
-        .navbar .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        .navbar .logo {
-            font-size: 1.4rem;
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #f5e6d3;
-            letter-spacing: 0.5px;
-        }
-
-        .navbar .logo span {
-            color: #d4a574;
+            color: var(--color-dark-brown);
+            text-decoration: none;
         }
 
         .nav-links {
+            list-style: none;
             display: flex;
             gap: 2rem;
         }
 
         .nav-links a {
-            color: #f5e6d3;
-            font-size: 0.95rem;
-            font-weight: 500;
+            text-decoration: none;
+            color: var(--color-dark-brown);
+            font-weight: 600;
+            font-size: 1rem;
             position: relative;
-            padding: 0.3rem 0;
-            transition: color 0.3s;
+            transition: color var(--transition-speed);
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
             width: 0;
             height: 2px;
-            background: #d4a574;
-            transition: width 0.3s;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-medium-brown);
+            transition: width var(--transition-speed);
         }
 
         .nav-links a:hover {
-            color: #d4a574;
+            color: var(--color-medium-brown);
         }
 
         .nav-links a:hover::after {
             width: 100%;
         }
 
-        /* Burger */
-        .burger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .burger span {
-            width: 28px;
-            height: 3px;
-            background: #f5e6d3;
-            border-radius: 2px;
-            transition: 0.3s;
-        }
-
-        /* ===== HERO ===== */
+        /* Главный экран (Hero) */
         .hero {
-            min-height: 100vh;
+            background: linear-gradient(rgba(20, 10, 5, 0.6), rgba(20, 10, 5, 0.6)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, rgba(74, 44, 42, 0.88), rgba(107, 58, 42, 0.82)),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%234a2c2a" width="1200" height="800"/><circle cx="200" cy="300" r="150" fill="%235a3535" opacity="0.3"/><circle cx="900" cy="500" r="200" fill="%235a3535" opacity="0.2"/><circle cx="600" cy="150" r="100" fill="%235a3535" opacity="0.25"/></svg>');
-            background-size: cover;
-            background-position: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '☕';
-            position: absolute;
-            font-size: 20rem;
-            opacity: 0.05;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
+            color: var(--color-white);
+            padding: 0 2rem;
+            margin-top: -80px; /* Чтобы компенсировать sticky header */
+            padding-top: 80px;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
+            max-width: 800px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero h1 {
+            color: var(--color-white);
             font-size: 3.5rem;
-            color: #fff8f0;
-            margin-bottom: 0.5rem;
-            line-height: 1.2;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .hero h1 .accent {
-            color: #d4a574;
-            display: block;
-            font-size: 1.2em;
-        }
-
-        .hero .tagline {
+        .hero p {
             font-size: 1.25rem;
-            color: #e8d5c0;
             margin-bottom: 2.5rem;
-            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
-        .btn {
+        .cta-button {
             display: inline-block;
+            background-color: var(--color-medium-brown);
+            color: var(--color-white);
             padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all var(--transition-speed);
+            box-shadow: 0 4px 15px rgba(139, 90, 43, 0.3);
+            border: 2px solid var(--color-medium-brown);
         }
 
-        .btn-primary {
-            background: #d4a574;
-            color: #3a2218;
-            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.4);
-        }
-
-        .btn-primary:hover {
-            background: #e0b78a;
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--color-white);
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.5);
+            box-shadow: 0 6px 20px rgba(139, 90, 43, 0.5);
         }
 
-        .btn-outline {
-            background: transparent;
-            color: #f5e6d3;
-            border: 2px solid #d4a574;
-            margin-left: 1rem;
-        }
-
-        .btn-outline:hover {
-            background: #d4a574;
-            color: #3a2218;
-            transform: translateY(-3px);
-        }
-
-        /* ===== SECTIONS ===== */
+        /* Секции общие стили */
         section {
             padding: 6rem 2rem;
-        }
-
-        .section-container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            color: #4a2c2a;
-            margin-bottom: 1rem;
+            margin-bottom: 3rem;
             position: relative;
         }
 
@@ -234,626 +177,278 @@
             content: '';
             display: block;
             width: 60px;
-            height: 4px;
-            background: #d4a574;
+            height: 3px;
+            background-color: var(--color-medium-brown);
             margin: 1rem auto 0;
             border-radius: 2px;
         }
 
-        .section-subtitle {
-            text-align: center;
-            color: #8B6F5E;
-            font-size: 1.1rem;
-            margin-bottom: 3.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* ===== ABOUT ===== */
-        .about {
-            background: #f5e6d3;
-        }
-
-        .about-grid {
+        /* О компании */
+        .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
 
-        .about-image {
-            width: 100%;
-            aspect-ratio: 4/3;
-            background: linear-gradient(135deg, #4a2c2a, #6b3a2a);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8rem;
-            box-shadow: 0 20px 40px rgba(74, 44, 42, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-image::before {
-            content: '🍩☕🍩';
-            position: relative;
-            z-index: 1;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-        }
-
-        .about-image::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(212,165,116,0.15) 0%, transparent 60%);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(20px, -20px); }
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            color: #4a2c2a;
-            margin-bottom: 1rem;
-        }
-
         .about-text p {
-            color: #5a3f30;
-            margin-bottom: 1rem;
-            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
 
-        .about-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2rem;
+        .about-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(74, 48, 24, 0.15);
+            transition: transform var(--transition-speed);
         }
 
-        .stat {
-            text-align: center;
+        .about-image:hover {
+            transform: scale(1.02);
         }
 
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #d4a574;
+        .about-image img {
+            width: 100%;
+            height: auto;
             display: block;
         }
 
-        .stat-label {
-            font-size: 0.9rem;
-            color: #7a5f4f;
-        }
-
-        /* ===== MENU ===== */
-        .menu {
-            background: #fff8f0;
-        }
-
+        /* Меню */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
-        .menu-card {
-            background: #fff;
-            border-radius: 20px;
+        .menu-item {
+            background-color: var(--color-white);
+            border-radius: 12px;
             padding: 2rem;
             text-align: center;
-            box-shadow: 0 5px 20px rgba(74, 44, 42, 0.08);
-            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(74, 48, 24, 0.05);
+            transition: all var(--transition-speed);
             position: relative;
             overflow: hidden;
         }
 
-        .menu-card::before {
+        .menu-item::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #d4a574, #6b3a2a);
+            background-color: var(--color-light-brown);
             transform: scaleX(0);
-            transition: transform 0.4s ease;
+            transition: transform var(--transition-speed);
+            transform-origin: left;
         }
 
-        .menu-card:hover::before {
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(74, 48, 24, 0.1);
+        }
+
+        .menu-item:hover::before {
             transform: scaleX(1);
         }
 
-        .menu-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(74, 44, 42, 0.15);
-        }
-
-        .menu-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .menu-card:hover .menu-icon {
-            transform: scale(1.15) rotate(-5deg);
-        }
-
-        .menu-card h3 {
-            font-size: 1.3rem;
-            color: #4a2c2a;
-            margin-bottom: 0.5rem;
-        }
-
-        .menu-card p {
-            color: #8B6F5E;
-            font-size: 0.95rem;
+        .item-icon {
+            font-size: 3rem;
             margin-bottom: 1rem;
         }
 
-        .menu-price {
+        .menu-item h3 {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: #d4a574;
-        }
-
-        .menu-tag {
-            display: inline-block;
-            background: #f5e6d3;
-            color: #6b3a2a;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
             margin-bottom: 1rem;
         }
 
-        /* ===== CONTACT ===== */
-        .contact {
-            background: #f5e6d3;
+        .menu-item p {
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        
+        .price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--color-medium-brown);
         }
 
-        .contact-grid {
+        /* Контакты */
+        .contact {
+            background-color: var(--color-light-brown);
+            border-radius: 16px;
+            color: var(--color-dark-brown);
+            padding: 4rem 2rem;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
         }
 
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+        .info-card {
+            background-color: var(--color-white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-speed);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
         }
 
-        .contact-item {
-            display: flex;
-            gap: 1.2rem;
-            align-items: flex-start;
-        }
-
-        .contact-icon {
-            width: 55px;
-            height: 55px;
-            min-width: 55px;
-            background: #4a2c2a;
-            border-radius: 15px;
+        .info-card h3 {
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: transform 0.3s, background 0.3s;
+            gap: 10px;
         }
 
-        .contact-item:hover .contact-icon {
-            transform: rotate(-10deg) scale(1.05);
-            background: #6b3a2a;
-        }
-
-        .contact-item h4 {
-            color: #4a2c2a;
+        .info-card p {
+            margin-bottom: 0.8rem;
             font-size: 1.1rem;
-            margin-bottom: 0.3rem;
         }
 
-        .contact-item p {
-            color: #6b5244;
-            font-size: 0.95rem;
-        }
-
-        .contact-map {
-            background: linear-gradient(135deg, #4a2c2a, #6b3a2a);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 350px;
-            color: #f5e6d3;
-            font-size: 1.1rem;
+        /* Подвал */
+        footer {
+            background-color: var(--color-dark-brown);
+            color: var(--color-cream);
             text-align: center;
             padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(74, 44, 42, 0.2);
         }
 
-        .contact-map::before {
-            content: '📍';
-            font-size: 5rem;
-            display: block;
-            margin-bottom: 1rem;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        .contact-map .map-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            background: #4a2c2a;
-            color: #d4c0a8;
-            text-align: center;
-            padding: 2.5rem 2rem;
-        }
-
-        .footer p {
-            font-size: 0.95rem;
-        }
-
-        .footer .heart {
-            color: #d4a574;
-            display: inline-block;
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .social-link {
-            width: 45px;
-            height: 45px;
-            background: rgba(245, 230, 211, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-
-        .social-link:hover {
-            background: #d4a574;
-            transform: translateY(-3px);
-        }
-
-        /* ===== SCROLL ANIMATIONS ===== */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== RESPONSIVE ===== */
+        /* Адаптивность для мобильных */
         @media (max-width: 768px) {
-            .navbar .container {
-                height: 60px;
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
             }
-
+            
             .nav-links {
-                position: fixed;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: rgba(74, 44, 42, 0.98);
-                flex-direction: column;
-                align-items: center;
-                padding: 2rem 0;
-                gap: 1.5rem;
-                transform: translateY(-100%);
-                opacity: 0;
-                transition: all 0.4s ease;
-                pointer-events: none;
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: all;
-            }
-
-            .burger {
-                display: flex;
-            }
-
-            .burger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-
-            .burger.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .burger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(6px, -6px);
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero h1 .accent {
-                font-size: 1.1em;
-            }
-
-            .hero .tagline {
-                font-size: 1rem;
-            }
-
-            .hero .btn {
-                padding: 0.8rem 1.8rem;
-                font-size: 0.95rem;
-            }
-
-            .btn-outline {
-                margin-left: 0;
-                margin-top: 1rem;
-            }
-
-            .hero-buttons {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 0;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .about-stats {
+                gap: 1rem;
+                flex-wrap: wrap;
                 justify-content: center;
             }
 
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 480px) {
-            section {
-                padding: 4rem 1.2rem;
-            }
-
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 2.5rem;
             }
 
-            .about-stats {
-                flex-direction: column;
-                gap: 1rem;
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 4rem 1rem;
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="#hero" class="logo">🍩 Два пончика <span>& чашка кофе</span></a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#hero" onclick="closeMenu()">Главная</a></li>
-                <li><a href="#about" onclick="closeMenu()">О нас</a></li>
-                <li><a href="#menu" onclick="closeMenu()">Меню</a></li>
-                <li><a href="#contact" onclick="closeMenu()">Контакты</a></li>
-            </ul>
-            <div class="burger" id="burger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">Два пончика и чашка кофе</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#menu">Меню</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- HERO -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1>Два пончика<span class="accent">& чашка кофе</span></h1>
-            <p class="tagline">Место, где каждое утро начинается с аромата свежесваренного кофе и тёплой улыбки</p>
-            <div class="hero-buttons">
-                <a href="#menu" class="btn btn-primary">Наше меню</a>
-                <a href="#contact" class="btn btn-outline">Где нас найти</a>
+    <main>
+        <!-- Главный экран -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Идеальная пара для вашего перерыва</h1>
+                <p>Погрузитесь в атмосферу уюта со свежайшими пончиками и безупречным кофе. Мы варим не просто напитки — мы создаём настроение.</p>
+                <a href="#menu" class="cta-button">Посмотреть меню</a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ABOUT -->
-    <section class="about" id="about">
-        <div class="section-container">
-            <h2 class="section-title fade-in">О нашей кофейне</h2>
-            <p class="section-subtitle fade-in">Больше чем просто кофе — это стиль жизни</p>
-            <div class="about-grid">
-                <div class="about-image fade-in"></div>
-                <div class="about-text fade-in">
-                    <h3>Наша история</h3>
-                    <p>Всё началось в 2018 году, когда два друга — Антон и Мария — решили создать место, куда хочется возвращаться. Место, где запах свежей выпечки встречает вас у входа, а бариста помнит ваш любимый напиток.</p>
-                    <p>Мы обжариваем зёрна сами, подбираем лучшие сорта из Эфиопии, Колумбии и Бразилии. Каждый пончик готовится вручную по нашим фирменным рецептам — без консервантов и с любовью к деталям.</p>
-                    <p>Сегодня «Два пончика и чашка кофе» — это уютное пространство для тех, кто ценит вкус, атмосферу и хорошую компанию.</p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">7+</span>
-                            <span class="stat-label">лет с вами</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">15K+</span>
-                            <span class="stat-label">чашек в месяц</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">12</span>
-                            <span class="stat-label">сортов зёрен</span>
-                        </div>
-                    </div>
+        <!-- О компании -->
+        <section id="about" class="about">
+            <h2 class="section-title">Наша история</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Интерьер кофейни">
+                </div>
+                <div class="about-text">
+                    <p>Кофейня «Два пончика и чашка кофе» родилась из простой страсти к качественному зерну и отличной выпечке. Мы верим, что счастье кроется в мелочах — в хрустящей корочке теплого пончика и бархатной Пенке утреннего латте.</p>
+                    <p>Каждый день с раннего утра наши пекари создают кулинарные шедевры, а бариста настраивают помол, чтобы вы могли насладиться лучшим вкусом. Приходите к нам за порцией вдохновения и тепла!</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- MENU -->
-    <section class="menu" id="menu">
-        <div class="section-container">
-            <h2 class="section-title fade-in">Наше меню</h2>
-            <p class="section-subtitle fade-in">Фирменные напитки, которые вы полюбите</p>
+        <!-- Меню с напитками -->
+        <section id="menu" class="menu">
+            <h2 class="section-title">Наши фирменные напитки</h2>
             <div class="menu-grid">
-                <div class="menu-card fade-in">
-                    <span class="menu-icon">☕</span>
-                    <span class="menu-tag">Хит продаж</span>
-                    <h3>Карамельный латте</h3>
-                    <p>Нежный латте с домашним карамельным сиропом и щепоткой корицы</p>
-                    <span class="menu-price">320 ₽</span>
+                <!-- Напиток 1 -->
+                <div class="menu-item">
+                    <div class="item-icon">☕</div>
+                    <h3>Фирменный Латте</h3>
+                    <p>Нежный эспрессо из 100% арабики с обильной молочной пенкой и каплей домашнего карамельного сиропа.</p>
+                    <div class="price">250 ₽</div>
                 </div>
-                <div class="menu-card fade-in">
-                    <span class="menu-icon">🍫</span>
-                    <span class="menu-tag">Новинка</span>
-                    <h3>Горячий шоколад «Бельгия»</h3>
-                    <p>Густой горячий шоколад из настоящего бельгийского какао с маршмеллоу</p>
-                    <span class="menu-price">350 ₽</span>
+                <!-- Напиток 2 -->
+                <div class="menu-item">
+                    <div class="item-icon">🍩</div>
+                    <h3>Моккачино с пончиком</h3>
+                    <p>Насыщенный шоколадный кофе с густыми сливками, подается с мини-пончиком на шпажке.</p>
+                    <div class="price">320 ₽</div>
                 </div>
-                <div class="menu-card fade-in">
-                    <span class="menu-icon">🧊</span>
-                    <span class="menu-tag">Летний хит</span>
-                    <h3>Айс-кофе «Тропик»</h3>
-                    <p>Холодный кофе с кокосовым молоком, ванилью и ноткой манго</p>
-                    <span class="menu-price">290 ₽</span>
+                <!-- Напиток 3 -->
+                <div class="menu-item">
+                    <div class="item-icon">🧊</div>
+                    <h3>Пряный Айс-кофе</h3>
+                    <p>Освежающий кофе холодного заваривания с добавлением корицы, мускатного ореха и льда.</p>
+                    <div class="price">280 ₽</div>
                 </div>
-                <div class="menu-card fade-in">
-                    <span class="menu-icon">🫖</span>
-                    <span class="menu-tag">Авторский</span>
-                    <h3>Раф «Пончик»</h3>
-                    <p>Авторский раф-кофе со сливками, ванилью и ароматом свежего пончика</p>
-                    <span class="menu-price">380 ₽</span>
+                <!-- Напиток 4 -->
+                <div class="menu-item">
+                    <div class="item-icon">🍯</div>
+                    <h3>Медовый Раф</h3>
+                    <p>Сливочный, тягучий кофейный напиток с натуральным цветочным медом и ванильным сахаром.</p>
+                    <div class="price">300 ₽</div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-        <div class="section-container">
-            <h2 class="section-title fade-in">Контакты</h2>
-            <p class="section-subtitle fade-in">Ждём вас каждый день!</p>
-            <div class="contact-grid">
-                <div class="contact-info fade-in">
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <h4>Адрес</h4>
-                            <p>г. Москва, ул. Пушкина, д. 10<br>ТЦ «Центральный», 1 этаж</p>
-                        </div>
+        <!-- Контакты -->
+        <section id="contact">
+            <div class="contact">
+                <h2 class="section-title">Ждем вас в гости</h2>
+                <div class="contact-content">
+                    <div class="info-card">
+                        <h3>📍 Местоположение</h3>
+                        <p>г. Москва, ул. Кофейная, д. 42</p>
+                        <p>Метро "Вкусная"</p>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🕐</div>
-                        <div>
-                            <h4>Часы работы</h4>
-                            <p>Пн–Пт: 7:00 — 22:00<br>Сб–Вс: 8:00 — 23:00</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📞</div>
-                        <div>
-                            <h4>Телефон</h4>
-                            <p>+7 (495) 123-45-67</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">✉️</div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>hello@dvapochika.ru</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-map fade-in">
-                    <div class="map-content">
-                        <p><strong>Мы на карте</strong></p>
-                        <p style="margin-top: 0.5rem; opacity: 0.8;">ул. Пушкина, д. 10<br>Москва, Россия</p>
+                    <div class="info-card">
+                        <h3>🕒 Часы работы</h3>
+                        <p><strong>Понедельник - Пятница:</strong> 07:30 - 22:00</p>
+                        <p><strong>Суббота - Воскресенье:</strong> 09:00 - 23:00</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="social-links">
-            <a href="#" class="social-link" title="Instagram">📸</a>
-            <a href="#" class="social-link" title="Telegram">✈️</a>
-            <a href="#" class="social-link" title="VK">💬</a>
-        </div>
-        <p>© 2026 «Два пончика и чашка кофе» — сделано с <span class="heart">♥</span></p>
+    <footer>
+        <p>&copy; 2026 Два пончика и чашка кофе. Все права защищены. Создано с ♡ и кофе.</p>
     </footer>
-
-    <script>
-        // Mobile menu
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-            document.getElementById('burger').classList.toggle('active');
-        }
-
-        function closeMenu() {
-            document.getElementById('navLinks').classList.remove('active');
-            document.getElementById('burger').classList.remove('active');
-        }
-
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    </script>
-
 </body>
 </html>
