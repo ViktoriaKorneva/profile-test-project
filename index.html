@@ -1,454 +1,1046 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Два пончика и чашка кофе</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --color-cream: #FAF3E0;
-            --color-light-brown: #C4A484;
-            --color-medium-brown: #8B5A2B;
-            --color-dark-brown: #4A3018;
-            --color-text: #2C1E16;
-            --color-white: #FFFFFF;
-            --transition-speed: 0.3s;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Два пончика и чашка кофе</title>
+  <style>
+    :root {
+      --espresso: #342015;
+      --coffee: #6f472d;
+      --caramel: #b9783f;
+      --cream: #fff4df;
+      --milk: #f8e5c2;
+      --foam: #fffaf0;
+      --sage: #8b9a71;
+      --berry: #8f3f4d;
+      --ink: #241711;
+      --shadow: 0 22px 60px rgba(52, 32, 21, 0.18);
+      --soft-shadow: 0 14px 32px rgba(52, 32, 21, 0.12);
+      --radius: 8px;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--color-text);
-            background-color: var(--color-cream);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 12%, rgba(185, 120, 63, 0.18), transparent 26rem),
+        radial-gradient(circle at 90% 5%, rgba(139, 154, 113, 0.16), transparent 24rem),
+        linear-gradient(135deg, #fffaf0 0%, #f8e5c2 48%, #edd4aa 100%);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--color-dark-brown);
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.24;
+      background-image:
+        linear-gradient(90deg, rgba(52, 32, 21, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(52, 32, 21, 0.05) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+    }
 
-        /* Навигация */
-        header {
-            position: sticky;
-            top: 0;
-            background-color: var(--color-white);
-            box-shadow: 0 2px 10px rgba(74, 48, 24, 0.1);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all var(--transition-speed);
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(52, 32, 21, 0.12);
+      background: rgba(255, 250, 240, 0.84);
+      backdrop-filter: blur(18px);
+    }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-dark-brown);
-            text-decoration: none;
-        }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      min-height: 76px;
+      gap: 24px;
+    }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--color-dark-brown);
-            font-weight: 600;
-            font-size: 1rem;
-            position: relative;
-            transition: color var(--transition-speed);
-        }
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 50% 50%, transparent 0 8px, var(--caramel) 9px 18px, var(--coffee) 19px),
+        linear-gradient(135deg, var(--coffee), var(--espresso));
+      border: 2px solid rgba(255, 244, 223, 0.74);
+      border-radius: 50%;
+      box-shadow: 0 8px 18px rgba(52, 32, 21, 0.2);
+      font-size: 0;
+    }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--color-medium-brown);
-            transition: width var(--transition-speed);
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(12px, 2.4vw, 34px);
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
 
-        .nav-links a:hover {
-            color: var(--color-medium-brown);
-        }
+    .nav-links a {
+      position: relative;
+      display: inline-flex;
+      padding: 8px 0;
+      color: rgba(36, 23, 17, 0.78);
+      transition: color 180ms ease, transform 180ms ease;
+    }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 4px;
+      height: 2px;
+      background: var(--berry);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 220ms ease;
+    }
 
-        /* Главный экран (Hero) */
-        .hero {
-            background: linear-gradient(rgba(20, 10, 5, 0.6), rgba(20, 10, 5, 0.6)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--color-white);
-            padding: 0 2rem;
-            margin-top: -80px; /* Чтобы компенсировать sticky header */
-            padding-top: 80px;
-        }
+    .nav-links a:hover {
+      color: var(--espresso);
+      transform: translateY(-1px);
+    }
 
-        .hero-content {
-            max-width: 800px;
-            animation: fadeIn 1s ease-in-out;
-        }
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    main {
+      width: 100%;
+    }
 
-        .hero h1 {
-            color: var(--color-white);
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+    section {
+      scroll-margin-top: 98px;
+    }
 
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2.5rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
+    .hero {
+      position: relative;
+      display: grid;
+      align-items: center;
+      min-height: calc(100vh - 76px);
+      padding: clamp(56px, 9vw, 96px) 0 clamp(42px, 7vw, 72px);
+    }
 
-        .cta-button {
-            display: inline-block;
-            background-color: var(--color-medium-brown);
-            color: var(--color-white);
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all var(--transition-speed);
-            box-shadow: 0 4px 15px rgba(139, 90, 43, 0.3);
-            border: 2px solid var(--color-medium-brown);
-        }
+    .hero-inner,
+    .section-inner {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-        .cta-button:hover {
-            background-color: transparent;
-            color: var(--color-white);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(139, 90, 43, 0.5);
-        }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.78fr);
+      gap: clamp(34px, 6vw, 76px);
+      align-items: center;
+    }
 
-        /* Секции общие стили */
-        section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--berry);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-        }
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 2px;
+      background: currentColor;
+    }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--color-medium-brown);
-            margin: 1rem auto 0;
-            border-radius: 2px;
-        }
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
 
-        /* О компании */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
+    h1 {
+      max-width: 760px;
+      color: var(--espresso);
+      font-size: clamp(3.1rem, 8vw, 6.8rem);
+    }
 
-        .about-text p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
+    h1 span {
+      color: var(--caramel);
+      font-style: italic;
+    }
 
-        .about-image {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(74, 48, 24, 0.15);
-            transition: transform var(--transition-speed);
-        }
+    .hero-copy {
+      max-width: 610px;
+      margin: 26px 0 34px;
+      color: rgba(36, 23, 17, 0.78);
+      font-size: clamp(1.04rem, 2vw, 1.25rem);
+    }
 
-        .about-image:hover {
-            transform: scale(1.02);
-        }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
 
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 24px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      font-weight: 900;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
 
-        /* Меню */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
+    .button-primary {
+      color: var(--foam);
+      background: linear-gradient(135deg, var(--espresso), var(--coffee));
+      box-shadow: 0 16px 28px rgba(52, 32, 21, 0.25);
+    }
 
-        .menu-item {
-            background-color: var(--color-white);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(74, 48, 24, 0.05);
-            transition: all var(--transition-speed);
-            position: relative;
-            overflow: hidden;
-        }
+    .button-secondary {
+      color: var(--espresso);
+      border-color: rgba(52, 32, 21, 0.2);
+      background: rgba(255, 250, 240, 0.58);
+    }
 
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color: var(--color-light-brown);
-            transform: scaleX(0);
-            transition: transform var(--transition-speed);
-            transform-origin: left;
-        }
+    .button:hover {
+      transform: translateY(-3px);
+    }
 
-        .menu-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(74, 48, 24, 0.1);
-        }
+    .button-primary:hover {
+      box-shadow: 0 24px 36px rgba(52, 32, 21, 0.3);
+    }
 
-        .menu-item:hover::before {
-            transform: scaleX(1);
-        }
+    .button-secondary:hover {
+      background: rgba(255, 250, 240, 0.9);
+      box-shadow: var(--soft-shadow);
+    }
 
-        .item-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
+    .hero-note {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      max-width: 560px;
+      margin-top: clamp(34px, 5vw, 52px);
+      overflow: hidden;
+      border: 1px solid rgba(52, 32, 21, 0.12);
+      border-radius: var(--radius);
+      background: rgba(52, 32, 21, 0.12);
+      box-shadow: var(--soft-shadow);
+    }
 
-        .menu-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
+    .hero-note div {
+      padding: 16px;
+      background: rgba(255, 250, 240, 0.64);
+    }
 
-        .menu-item p {
-            color: #555;
-            margin-bottom: 1.5rem;
-        }
-        
-        .price {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--color-medium-brown);
-        }
+    .hero-note strong {
+      display: block;
+      color: var(--espresso);
+      font-size: 1.12rem;
+    }
 
-        /* Контакты */
-        .contact {
-            background-color: var(--color-light-brown);
-            border-radius: 16px;
-            color: var(--color-dark-brown);
-            padding: 4rem 2rem;
-            margin-top: 2rem;
-            margin-bottom: 4rem;
-        }
+    .hero-note span {
+      color: rgba(36, 23, 17, 0.66);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
 
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
+    .hero-visual {
+      position: relative;
+      min-height: 520px;
+    }
 
-        .info-card {
-            background-color: var(--color-white);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform var(--transition-speed);
-        }
-        
-        .info-card:hover {
-            transform: translateY(-5px);
-        }
+    .photo-card {
+      position: absolute;
+      inset: 16px 0 0 auto;
+      width: min(420px, 100%);
+      min-height: 490px;
+      overflow: hidden;
+      border: 1px solid rgba(52, 32, 21, 0.13);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(rgba(52, 32, 21, 0.1), rgba(52, 32, 21, 0.1)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 940'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23f9e7c5'/%3E%3Cstop offset='.55' stop-color='%23bf8650'/%3E%3Cstop offset='1' stop-color='%23342015'/%3E%3C/linearGradient%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 .14'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3C/defs%3E%3Crect fill='url(%23bg)' width='720' height='940'/%3E%3Crect filter='url(%23grain)' opacity='.5' width='720' height='940'/%3E%3Cellipse cx='350' cy='700' rx='245' ry='60' fill='%23241711' opacity='.28'/%3E%3Cg transform='translate(214 430)'%3E%3Cpath d='M22 80h250l-34 196c-6 34-38 58-76 58h-30c-38 0-70-24-76-58z' fill='%23fff4df'/%3E%3Cpath d='M52 105h191l-27 159c-4 25-27 43-55 43h-27c-28 0-51-18-55-43z' fill='%23734a30'/%3E%3Cpath d='M72 104h151c2 58-37 91-78 91s-76-30-73-91z' fill='%23fffaf0' opacity='.72'/%3E%3Cpath d='M0 82c0-35 33-63 74-63h159c41 0 74 28 74 63 0 12-10 22-22 22H22C10 104 0 94 0 82z' fill='%23fffaf0'/%3E%3Cpath d='M49 54c36 20 168 21 207-2' fill='none' stroke='%23d6b588' stroke-width='14' stroke-linecap='round' opacity='.85'/%3E%3C/g%3E%3Cg transform='translate(88 182)'%3E%3Ccircle cx='156' cy='156' r='126' fill='%23b9783f'/%3E%3Ccircle cx='156' cy='156' r='48' fill='%23f8e5c2'/%3E%3Cpath d='M52 140c34-74 137-105 206-44 34 31 42 75 19 118-41-13-67 8-92 28-41 33-100 28-132-11-25-31-25-66-1-91z' fill='%238f3f4d' opacity='.72'/%3E%3Ccircle cx='92' cy='101' r='8' fill='%23fff4df'/%3E%3Ccircle cx='223' cy='105' r='7' fill='%23fff4df'/%3E%3Ccircle cx='101' cy='211' r='7' fill='%23fff4df'/%3E%3Ccircle cx='234' cy='202' r='8' fill='%23fff4df'/%3E%3C/g%3E%3Cg transform='translate(388 142) rotate(10)'%3E%3Ccircle cx='112' cy='112' r='95' fill='%23f4c37d'/%3E%3Ccircle cx='112' cy='112' r='36' fill='%23f8e5c2'/%3E%3Cpath d='M41 102c32-48 105-70 147-27 15 15 22 33 21 52-46-17-67 5-94 19-31 15-67 12-90-13-1-11 4-22 16-31z' fill='%23fff4df' opacity='.76'/%3E%3Ccircle cx='78' cy='74' r='6' fill='%238b9a71'/%3E%3Ccircle cx='161' cy='83' r='6' fill='%238b9a71'/%3E%3Ccircle cx='83' cy='151' r='6' fill='%238b9a71'/%3E%3Ccircle cx='155' cy='153' r='6' fill='%238b9a71'/%3E%3C/g%3E%3C/svg%3E")
+        center / cover no-repeat;
+      box-shadow: var(--shadow);
+      transform: rotate(1.5deg);
+    }
 
-        .info-card h3 {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .photo-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(52, 32, 21, 0.28), transparent 44%);
+    }
 
-        .info-card p {
-            margin-bottom: 0.8rem;
-            font-size: 1.1rem;
-        }
+    .floating-ticket {
+      position: absolute;
+      left: 0;
+      bottom: 38px;
+      width: min(286px, 72%);
+      padding: 20px;
+      border: 1px solid rgba(52, 32, 21, 0.16);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.9);
+      box-shadow: var(--shadow);
+      animation: floatCard 5s ease-in-out infinite;
+    }
 
-        /* Подвал */
-        footer {
-            background-color: var(--color-dark-brown);
-            color: var(--color-cream);
-            text-align: center;
-            padding: 2rem;
-        }
+    .floating-ticket strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--espresso);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      line-height: 1.15;
+    }
 
-        /* Адаптивность для мобильных */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+    .floating-ticket span {
+      color: rgba(36, 23, 17, 0.72);
+      font-weight: 700;
+    }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+    @keyframes floatCard {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
 
-            .about-content {
-                grid-template-columns: 1fr;
-            }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
 
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-            
-            section {
-                padding: 4rem 1rem;
-            }
-        }
-    </style>
+    .section {
+      padding: clamp(68px, 9vw, 112px) 0;
+    }
+
+    .section-kicker {
+      margin: 0 0 14px;
+      color: var(--berry);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      max-width: 760px;
+      color: var(--espresso);
+      font-size: clamp(2.25rem, 5vw, 4.25rem);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: clamp(28px, 5vw, 64px);
+      align-items: start;
+    }
+
+    .about-badge {
+      position: sticky;
+      top: 104px;
+      padding: 28px;
+      border: 1px solid rgba(52, 32, 21, 0.12);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.7);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .about-badge .year {
+      display: block;
+      color: var(--caramel);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.5rem, 8vw, 6.2rem);
+      line-height: 0.9;
+    }
+
+    .about-badge p {
+      margin: 18px 0 0;
+      color: rgba(36, 23, 17, 0.72);
+      font-weight: 700;
+    }
+
+    .about-copy {
+      display: grid;
+      gap: 20px;
+      color: rgba(36, 23, 17, 0.77);
+      font-size: clamp(1rem, 1.6vw, 1.12rem);
+    }
+
+    .about-copy p {
+      margin: 0;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .value {
+      padding: 18px;
+      border: 1px solid rgba(52, 32, 21, 0.12);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.58);
+    }
+
+    .value strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--espresso);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.18rem;
+    }
+
+    .menu-section {
+      background:
+        linear-gradient(180deg, rgba(52, 32, 21, 0.04), rgba(143, 63, 77, 0.05)),
+        rgba(255, 250, 240, 0.4);
+      border-block: 1px solid rgba(52, 32, 21, 0.09);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: clamp(28px, 4vw, 44px);
+    }
+
+    .section-head p {
+      max-width: 380px;
+      margin: 0;
+      color: rgba(36, 23, 17, 0.69);
+      font-weight: 700;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .menu-card {
+      position: relative;
+      min-height: 364px;
+      padding: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(52, 32, 21, 0.12);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.76);
+      box-shadow: 0 10px 22px rgba(52, 32, 21, 0.08);
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .menu-card:hover {
+      border-color: rgba(143, 63, 77, 0.42);
+      box-shadow: var(--shadow);
+      transform: translateY(-8px);
+    }
+
+    .drink-art {
+      position: relative;
+      height: 174px;
+      margin-bottom: 22px;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 30% 24%, rgba(255, 250, 240, 0.95) 0 18px, transparent 19px),
+        radial-gradient(circle at 64% 18%, rgba(255, 250, 240, 0.62) 0 12px, transparent 13px),
+        linear-gradient(135deg, var(--milk), rgba(185, 120, 63, 0.4));
+      overflow: hidden;
+    }
+
+    .drink-art::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      width: 98px;
+      height: 122px;
+      border-radius: 0 0 28px 28px;
+      background: linear-gradient(180deg, var(--foam) 0 24%, var(--coffee) 25% 100%);
+      box-shadow: inset 0 0 0 7px rgba(255, 250, 240, 0.45);
+      transform: translateX(-50%);
+    }
+
+    .drink-art::after {
+      content: "";
+      position: absolute;
+      left: calc(50% + 42px);
+      bottom: 70px;
+      width: 38px;
+      height: 48px;
+      border: 9px solid rgba(255, 250, 240, 0.82);
+      border-left: 0;
+      border-radius: 0 28px 28px 0;
+    }
+
+    .menu-card:nth-child(2) .drink-art {
+      background:
+        radial-gradient(circle at 68% 22%, rgba(255, 250, 240, 0.9) 0 16px, transparent 17px),
+        linear-gradient(135deg, #f4c37d, rgba(143, 63, 77, 0.33));
+    }
+
+    .menu-card:nth-child(2) .drink-art::before {
+      background: linear-gradient(180deg, var(--foam) 0 28%, #8f3f4d 29% 100%);
+    }
+
+    .menu-card:nth-child(3) .drink-art {
+      background:
+        radial-gradient(circle at 32% 25%, rgba(255, 250, 240, 0.86) 0 16px, transparent 17px),
+        linear-gradient(135deg, #d7c99a, rgba(139, 154, 113, 0.52));
+    }
+
+    .menu-card:nth-child(3) .drink-art::before {
+      background: linear-gradient(180deg, var(--foam) 0 30%, #7d835f 31% 100%);
+    }
+
+    .menu-card:nth-child(4) .drink-art {
+      background:
+        radial-gradient(circle at 70% 22%, rgba(255, 250, 240, 0.9) 0 15px, transparent 16px),
+        linear-gradient(135deg, #eed0a0, rgba(111, 71, 45, 0.52));
+    }
+
+    .menu-card h3 {
+      color: var(--espresso);
+      font-size: 1.42rem;
+    }
+
+    .menu-card p {
+      margin: 12px 0 18px;
+      color: rgba(36, 23, 17, 0.68);
+      font-size: 0.96rem;
+    }
+
+    .price {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--berry);
+      font-weight: 900;
+    }
+
+    .price::before {
+      content: "";
+      width: 26px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+      gap: clamp(24px, 5vw, 56px);
+      align-items: stretch;
+    }
+
+    .contact-card {
+      padding: clamp(24px, 4vw, 38px);
+      border-radius: var(--radius);
+      color: var(--foam);
+      background:
+        linear-gradient(145deg, rgba(52, 32, 21, 0.92), rgba(111, 71, 45, 0.95)),
+        radial-gradient(circle at 90% 10%, rgba(185, 120, 63, 0.46), transparent 20rem);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h2 {
+      max-width: 520px;
+      margin-bottom: 22px;
+      color: var(--foam);
+      font-size: clamp(2rem, 4vw, 3.45rem);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .contact-item {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .contact-icon {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      color: var(--espresso);
+      background: var(--milk);
+      font-weight: 900;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--cream);
+    }
+
+    .contact-item span {
+      color: rgba(255, 250, 240, 0.76);
+    }
+
+    .map-panel {
+      position: relative;
+      min-height: 420px;
+      overflow: hidden;
+      border: 1px solid rgba(52, 32, 21, 0.14);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(90deg, rgba(52, 32, 21, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(52, 32, 21, 0.06) 1px, transparent 1px),
+        linear-gradient(135deg, #f6e2bd, #fffaf0);
+      background-size: 42px 42px, 42px 42px, auto;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .map-road {
+      position: absolute;
+      background: rgba(111, 71, 45, 0.2);
+      transform: rotate(-22deg);
+    }
+
+    .map-road.one {
+      top: 126px;
+      left: -40px;
+      width: 128%;
+      height: 38px;
+    }
+
+    .map-road.two {
+      top: 218px;
+      left: -50px;
+      width: 122%;
+      height: 28px;
+      transform: rotate(28deg);
+      background: rgba(139, 154, 113, 0.22);
+    }
+
+    .map-pin {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      display: grid;
+      place-items: center;
+      width: 94px;
+      height: 94px;
+      border: 9px solid var(--foam);
+      border-radius: 50% 50% 50% 0;
+      color: var(--foam);
+      background: var(--berry);
+      box-shadow: var(--shadow);
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    .map-pin span {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      transform: rotate(45deg);
+    }
+
+    .map-caption {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      padding: 18px;
+      border: 1px solid rgba(52, 32, 21, 0.12);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.86);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .map-caption strong {
+      display: block;
+      color: var(--espresso);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.25rem;
+    }
+
+    .map-caption span {
+      color: rgba(36, 23, 17, 0.68);
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 28px 0;
+      color: rgba(36, 23, 17, 0.64);
+      text-align: center;
+      font-weight: 700;
+    }
+
+    @media (max-width: 940px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        min-height: auto;
+        padding: 14px 0;
+        gap: 10px;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 0.88rem;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 470px;
+        max-width: 560px;
+      }
+
+      .photo-card {
+        left: 8%;
+        right: auto;
+        width: 82%;
+      }
+
+      .about-badge {
+        position: static;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .logo {
+        white-space: normal;
+      }
+
+      .nav-links {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        text-align: center;
+      }
+
+      .nav-links a {
+        justify-content: center;
+        min-height: 38px;
+        padding: 8px 4px;
+        border: 1px solid rgba(52, 32, 21, 0.1);
+        border-radius: var(--radius);
+        background: rgba(255, 250, 240, 0.58);
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+
+      .hero-inner,
+      .section-inner {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .hero-note,
+      .values,
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 390px;
+      }
+
+      .photo-card {
+        inset: 0 auto auto 0;
+        width: 100%;
+        min-height: 360px;
+      }
+
+      .floating-ticket {
+        left: 16px;
+        bottom: 8px;
+        width: calc(100% - 32px);
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .menu-card {
+        min-height: auto;
+      }
+
+      .contact-item {
+        grid-template-columns: 40px 1fr;
+      }
+
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .map-panel {
+        min-height: 360px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <a href="#" class="logo">Два пончика и чашка кофе</a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Главная</a></li>
-                    <li><a href="#about">О нас</a></li>
-                    <li><a href="#menu">Меню</a></li>
-                    <li><a href="#contact">Контакты</a></li>
-                </ul>
-            </nav>
+  <header class="site-header">
+    <nav class="nav" aria-label="Основная навигация">
+      <a href="#home" class="logo" aria-label="Два пончика и чашка кофе">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>Два пончика и чашка кофе</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#menu">Меню</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">Спешелти кофе и свежая выпечка</p>
+          <h1>Утро начинается с <span>двух пончиков</span> и хорошего кофе</h1>
+          <p class="hero-copy">
+            Небольшая кофейня с большим характером: обжариваем зерно малыми партиями,
+            готовим пончики к открытию и собираем уютный ритуал для каждого гостя.
+          </p>
+          <div class="hero-actions">
+            <a href="#menu" class="button button-primary">Посмотреть меню</a>
+            <a href="#contacts" class="button button-secondary">Как нас найти</a>
+          </div>
+          <div class="hero-note" aria-label="Преимущества кофейни">
+            <div>
+              <strong>07:30</strong>
+              <span>открываем двери</span>
+            </div>
+            <div>
+              <strong>2 сорта</strong>
+              <span>зерна каждый день</span>
+            </div>
+            <div>
+              <strong>18 мин</strong>
+              <span>до новой партии</span>
+            </div>
+          </div>
         </div>
-    </header>
 
-    <main>
-        <!-- Главный экран -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Идеальная пара для вашего перерыва</h1>
-                <p>Погрузитесь в атмосферу уюта со свежайшими пончиками и безупречным кофе. Мы варим не просто напитки — мы создаём настроение.</p>
-                <a href="#menu" class="cta-button">Посмотреть меню</a>
+        <div class="hero-visual" aria-label="Кофе и пончики">
+          <div class="photo-card"></div>
+          <div class="floating-ticket">
+            <strong>Пара дня</strong>
+            <span>Флэт уайт на бразильском зерне и пончик с соленой карамелью.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-inner about-grid">
+        <aside class="about-badge">
+          <span class="year">2019</span>
+          <p>С тех пор мы печем пончики вручную и варим кофе так, будто город только просыпается.</p>
+        </aside>
+        <div>
+          <p class="section-kicker">О компании</p>
+          <h2 class="section-title">Мы выросли из маленькой стойки у окна в место, куда заходят за настроением.</h2>
+          <div class="about-copy">
+            <p>
+              «Два пончика и чашка кофе» начиналась как утренний поп-ап для соседей:
+              один рожковый аппарат, шесть вкусов пончиков и очередь людей, которые
+              хотели получить свой первый теплый глоток без суеты.
+            </p>
+            <p>
+              Сегодня мы остаемся такими же камерными. Бариста знают любимые напитки
+              постоянных гостей, тесто подходит ночью, глазури смешиваются на кухне,
+              а меню меняется по сезону, чтобы в чашке и на тарелке было живо.
+            </p>
+            <div class="values">
+              <div class="value">
+                <strong>Зерно</strong>
+                <span>Отборные партии от локальных обжарщиков.</span>
+              </div>
+              <div class="value">
+                <strong>Тесто</strong>
+                <span>Медленная ферментация и свежая выпечка утром.</span>
+              </div>
+              <div class="value">
+                <strong>Гости</strong>
+                <span>Уютный сервис без лишней формальности.</span>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <!-- О компании -->
-        <section id="about" class="about">
-            <h2 class="section-title">Наша история</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Интерьер кофейни">
-                </div>
-                <div class="about-text">
-                    <p>Кофейня «Два пончика и чашка кофе» родилась из простой страсти к качественному зерну и отличной выпечке. Мы верим, что счастье кроется в мелочах — в хрустящей корочке теплого пончика и бархатной Пенке утреннего латте.</p>
-                    <p>Каждый день с раннего утра наши пекари создают кулинарные шедевры, а бариста настраивают помол, чтобы вы могли насладиться лучшим вкусом. Приходите к нам за порцией вдохновения и тепла!</p>
-                </div>
+    <section class="section menu-section" id="menu">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Предпросмотр меню</p>
+            <h2 class="section-title">Фирменные напитки, ради которых легко свернуть с маршрута.</h2>
+          </div>
+          <p>Каждый напиток можно дополнить классическим, ягодным или карамельным пончиком.</p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <div class="drink-art" aria-hidden="true"></div>
+            <h3>Ореховый раф</h3>
+            <p>Сливочный эспрессо с фундуком, ванилью и тонкой пеной.</p>
+            <span class="price">360 ₽</span>
+          </article>
+          <article class="menu-card">
+            <div class="drink-art" aria-hidden="true"></div>
+            <h3>Мокко «Глазурь»</h3>
+            <p>Темный шоколад, двойной шот и нежный ягодный акцент.</p>
+            <span class="price">390 ₽</span>
+          </article>
+          <article class="menu-card">
+            <div class="drink-art" aria-hidden="true"></div>
+            <h3>Матча латте</h3>
+            <p>Церемониальная матча, молоко на выбор и медовая сладость.</p>
+            <span class="price">380 ₽</span>
+          </article>
+          <article class="menu-card">
+            <div class="drink-art" aria-hidden="true"></div>
+            <h3>Флэт уайт</h3>
+            <p>Плотный кофейный вкус, шелковистое молоко и баланс без сахара.</p>
+            <span class="price">340 ₽</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacts">
+      <div class="section-inner contact-grid">
+        <div class="contact-card">
+          <p class="section-kicker">Контакты</p>
+          <h2>Заходите за кофе, оставайтесь на второй пончик.</h2>
+          <div class="contact-list">
+            <div class="contact-item">
+              <span class="contact-icon">⌂</span>
+              <div>
+                <strong>Местоположение</strong>
+                <span>ул. Большая Кофейная, 12, Москва</span>
+              </div>
             </div>
-        </section>
-
-        <!-- Меню с напитками -->
-        <section id="menu" class="menu">
-            <h2 class="section-title">Наши фирменные напитки</h2>
-            <div class="menu-grid">
-                <!-- Напиток 1 -->
-                <div class="menu-item">
-                    <div class="item-icon">☕</div>
-                    <h3>Фирменный Латте</h3>
-                    <p>Нежный эспрессо из 100% арабики с обильной молочной пенкой и каплей домашнего карамельного сиропа.</p>
-                    <div class="price">250 ₽</div>
-                </div>
-                <!-- Напиток 2 -->
-                <div class="menu-item">
-                    <div class="item-icon">🍩</div>
-                    <h3>Моккачино с пончиком</h3>
-                    <p>Насыщенный шоколадный кофе с густыми сливками, подается с мини-пончиком на шпажке.</p>
-                    <div class="price">320 ₽</div>
-                </div>
-                <!-- Напиток 3 -->
-                <div class="menu-item">
-                    <div class="item-icon">🧊</div>
-                    <h3>Пряный Айс-кофе</h3>
-                    <p>Освежающий кофе холодного заваривания с добавлением корицы, мускатного ореха и льда.</p>
-                    <div class="price">280 ₽</div>
-                </div>
-                <!-- Напиток 4 -->
-                <div class="menu-item">
-                    <div class="item-icon">🍯</div>
-                    <h3>Медовый Раф</h3>
-                    <p>Сливочный, тягучий кофейный напиток с натуральным цветочным медом и ванильным сахаром.</p>
-                    <div class="price">300 ₽</div>
-                </div>
+            <div class="contact-item">
+              <span class="contact-icon">◷</span>
+              <div>
+                <strong>Часы работы</strong>
+                <span>Пн-Пт 07:30-21:00, Сб-Вс 08:30-22:00</span>
+              </div>
             </div>
-        </section>
-
-        <!-- Контакты -->
-        <section id="contact">
-            <div class="contact">
-                <h2 class="section-title">Ждем вас в гости</h2>
-                <div class="contact-content">
-                    <div class="info-card">
-                        <h3>📍 Местоположение</h3>
-                        <p>г. Москва, ул. Кофейная, д. 42</p>
-                        <p>Метро "Вкусная"</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>🕒 Часы работы</h3>
-                        <p><strong>Понедельник - Пятница:</strong> 07:30 - 22:00</p>
-                        <p><strong>Суббота - Воскресенье:</strong> 09:00 - 23:00</p>
-                    </div>
-                </div>
+            <div class="contact-item">
+              <span class="contact-icon">☎</span>
+              <div>
+                <strong>Связь</strong>
+                <span>+7 999 245-20-20 · hello@twodonuts.coffee</span>
+              </div>
             </div>
-        </section>
-    </main>
+          </div>
+        </div>
 
-    <footer>
-        <p>&copy; 2026 Два пончика и чашка кофе. Все права защищены. Создано с ♡ и кофе.</p>
-    </footer>
+        <div class="map-panel" aria-label="Карта расположения кофейни">
+          <span class="map-road one"></span>
+          <span class="map-road two"></span>
+          <div class="map-pin"><span>2</span></div>
+          <div class="map-caption">
+            <strong>Пять минут от метро «Теплый переулок»</strong>
+            <span>Вход со стороны сквера, рядом с книжной лавкой.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 «Два пончика и чашка кофе». Варим тепло каждый день.
+  </footer>
 </body>
 </html>
